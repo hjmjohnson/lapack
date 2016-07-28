@@ -11,15 +11,15 @@ macro(add_cblas_test output input target)
   if(EXISTS "${TEST_INPUT}")
     add_test(NAME CBLAS-${testName} COMMAND "${CMAKE_COMMAND}"
       -DTEST=$<TARGET_FILE:${target}>
-      -DINPUT=${TEST_INPUT}
-      -DOUTPUT=${TEST_OUTPUT}
-      -DINTDIR=${CMAKE_CFG_INTDIR}
+      -DINPUT:PATH="${TEST_INPUT}"
+      -DOUTPUT:PATH="${TEST_OUTPUT}"
+      -DINTDIR:PATH="${CMAKE_CFG_INTDIR}"
       -P "${LAPACK_SOURCE_DIR}/TESTING/runtest.cmake")
     else()
-      add_test(NAME CBLAS-${testName} COMMAND "${CMAKE_COMMAND}"
+      add_test(NAME CBLAS-${testName}x COMMAND "${CMAKE_COMMAND}"
         -DTEST=$<TARGET_FILE:${target}>
-        -DOUTPUT=${TEST_OUTPUT}
-        -DINTDIR=${CMAKE_CFG_INTDIR}
+        -DOUTPUT:PATH="${TEST_OUTPUT}"
+        -DINTDIR:PATH="${CMAKE_CFG_INTDIR}"
         -P "${LAPACK_SOURCE_DIR}/TESTING/runtest.cmake")
     endif()
 endmacro()
